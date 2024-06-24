@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap-env="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://facturandote.com/facturandote-ws/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://facturandote.com/facturandote-ws/">
+<wsdl:types>
+<xsd:schema targetNamespace="http://facturandote.com/facturandote-ws/"/>
+</wsdl:types>
+<wsdl:message name="SaludarRequest">
+<wsdl:part name="nombre" type="xsd:string"/>
+</wsdl:message>
+<wsdl:message name="SaludarResponse">
+<wsdl:part name="SaludarReturn" type="xsd:string"/>
+</wsdl:message>
+<wsdl:message name="TimbrarRequest">
+<wsdl:part name="rfc" type="xsd:string"/>
+<wsdl:part name="iduser" type="xsd:string"/>
+<wsdl:part name="xml" type="xsd:string"/>
+</wsdl:message>
+<wsdl:message name="TimbrarResponse">
+<wsdl:part name="TimbrarReturn" type="xsd:string"/>
+</wsdl:message>
+<wsdl:message name="CancelarRequest">
+<wsdl:part name="user" type="xsd:string"/>
+<wsdl:part name="foliofis" type="xsd:string"/>
+<wsdl:part name="rfcemi" type="xsd:string"/>
+<wsdl:part name="rfcrec" type="xsd:string"/>
+<wsdl:part name="total" type="xsd:string"/>
+<wsdl:part name="motivo" type="xsd:string"/>
+<wsdl:part name="uuidsus" type="xsd:string"/>
+<wsdl:part name="firma" type="xsd:string"/>
+</wsdl:message>
+<wsdl:message name="CancelarResponse">
+<wsdl:part name="CancelarReturn" type="xsd:string"/>
+</wsdl:message>
+<wsdl:portType name="FacturandotePortType">
+<wsdl:operation name="Saludar">
+<wsdl:documentation>Devuelve un saludo</wsdl:documentation>
+<wsdl:input message="tns:SaludarRequest"/>
+<wsdl:output message="tns:SaludarResponse"/>
+</wsdl:operation>
+<wsdl:operation name="Timbrar">
+<wsdl:documentation>Devuelve el xml de un cfdi sin sello ya timbrado por el SAT</wsdl:documentation>
+<wsdl:input message="tns:TimbrarRequest"/>
+<wsdl:output message="tns:TimbrarResponse"/>
+</wsdl:operation>
+<wsdl:operation name="Cancelar">
+<wsdl:documentation>Devuelve la respuesta de cancelacion del SAT despues de enviar un uuid</wsdl:documentation>
+<wsdl:input message="tns:CancelarRequest"/>
+<wsdl:output message="tns:CancelarResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="FacturandoteBinding" type="tns:FacturandotePortType">
+<soap-env:binding xmlns="http://schemas.xmlsoap.org/wsdl/soap/" style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="Saludar">
+<soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://facturandote.com/facturandote-ws/facturandotews.php?method=Saludar" style="rpc"/>
+<wsdl:input>
+<soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</wsdl:input>
+<wsdl:output>
+<soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="Timbrar">
+<soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://facturandote.com/facturandote-ws/facturandotews.php?method=Timbrar" style="rpc"/>
+<wsdl:input>
+<soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</wsdl:input>
+<wsdl:output>
+<soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="Cancelar">
+<soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://facturandote.com/facturandote-ws/facturandotews.php?method=Cancelar" style="rpc"/>
+<wsdl:input>
+<soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</wsdl:input>
+<wsdl:output>
+<soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="Facturandote">
+<wsdl:documentation>Clase FacturandotePortal</wsdl:documentation>
+<wsdl:port name="FacturandotePort" binding="tns:FacturandoteBinding">
+<soap-env:address location="http://facturandote.com/facturandote-ws/facturandotews.php"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
