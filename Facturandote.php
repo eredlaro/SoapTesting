@@ -3,7 +3,7 @@ include('con3xion.php');
 
 
 
-/** Clase FacturandotePortal */
+/** Clase Facturandote */
 class Facturandote
 {
     /**
@@ -16,6 +16,7 @@ class Facturandote
 
         return "hola " . $nombre . "!";
     }
+
     private function Foliosres($iduser)
     {
         $sql = Conexion::conectarlocal();
